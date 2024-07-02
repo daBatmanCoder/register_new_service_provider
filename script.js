@@ -70,7 +70,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     }
 
     // Here you would typically send this data to your server
-    const checkUrl = 'https://europe-west4-arnacon-nl.cloudfunctions.net/register_new_service_provider';
+    const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
     fetch(checkUrl, {
         method: 'POST',
         headers: {
