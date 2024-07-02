@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favi.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <title>Service Provider Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Service Provider Registration</h1>
+        <form id="registrationForm">
+            <div class="step" id="step1">
+                <h2>Step 1: Basic Information</h2>
+                <input type="text" id="name" name="name" placeholder="Service provider name" required>
+                <button type="button" onclick="nextStep(1)">Next</button>
+            </div>
+            <div class="step" id="step2">
+                <h2>Step 2: ENS</h2>
+                <p class="description">
+                    Enter the ENS name you wish to purchase. It should consist of letters and numbers only, and cannot be purely numeric.
+                </p>
+                <p>(Default) Every ENS will be suffixed with ".cellact"</p>
+                <button type="button" class="domain-button" onclick="setDomain('cellact')">.cellact</button>
+                <p></p>
+                <button type="button" class="domain-button" onclick="setDomain('eth')">.eth</button>
+                <input type="hidden" id="selectedDomain" name="selectedDomain" value="cellact">
+                <p></p>
+                <input type="text" id="ensName" name="ensName" placeholder="Your ENS name" required>
+                <p></p>
+                <button type="button" id="checkENS" onclick="checkENSS()">Check Availability</button>
+                <p id="availabilityResult"></p>
+                <p></p>
+                <input type="password" id="password" name="password" placeholder="Enter your encryption password" style="display: none;">
+                <button type="button" id="registerENS" onclick="registerENSES()" style="display: none;">Register ENS</button>
+                <div id="result" style="display: none;"></div>
+                <p id="instructions" style="display: none;">Hey, this text needs to be copied together with the password you chose in order to activate your ENS name in the Arnacon app. Please copy and paste it in the Arnacon app.</p>
+                <!-- <button type="button" onclick="prevStep(2)">Previous</button> -->
+                <input type="hidden" id="ENS" name="ENSChoose" value="">
+
+                <p></p>
+                <button type="button" id = "ENStep" onclick="nextStep(2)" disabled>Next</button>
+            </div>
+            <div class="step" id="step3">
+                <h2>Step 3: Domain</h2>
+                <input type="text" id="domain" name="domain" placeholder="Your Domain" required>
+                <!-- <button type="button" onclick="prevStep(3)">Previous</button> -->
+                <button type="button" onclick="nextStep(3)">Next</button>
+            </div>
+            <div class="step" id="step4">
+                <h2>Step 4: Confirmation</h2>
+                <p>Please review your information:</p>
+                <div id="confirmationDetails">
+                    <p><strong>Service Provider Name:</strong> <span id="confirmSPName"></span></p>
+                    <p><strong>ENS:</strong> <span id="confirmENS"></span></p>
+                    <p><strong>Domain:</strong> <span id="confirmSPDomain"></span></p>
+                </div>
+                <!-- <button type="button" onclick="prevStep(4)">Previous</button> -->
+                <button type="submit">Submit</button>
+            </div>
+
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

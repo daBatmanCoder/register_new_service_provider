@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.step {
+    display: none;
+}
+
+.step:first-child {
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: rgb(82, 191, 227);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+body, html {
+    font-family: Arial, sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #f4f4f4;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center; /* Center text for all elements in the container */
+  }
+  
+  .description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: center; /* Keep description text aligned to the left */
+  }
+  
+  input[type="password"], #result {
+    width: 100%; /* Ensures input and result div take full width adjusting padding and border */
+    box-sizing: border-box; /* Includes padding and border in the width */
+  }
+  
+  input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  #result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: none; /* Initially hidden */
+    text-align: center; /* Aligns the text of result to the left */
+    overflow-wrap: break-word; /* Ensures long words do not overflow */
+  }
+  
+  #error {
+    color: red; /* Red text for errors */
+  }
+  
+  .domain-button {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid grey;
+    background-color: white;
+    color: black;
+    transition: all 0.3s ease;
+  }
+  
+  .domain-button.active {
+    background-color: navy !important;
+    color: white !important;
+    border-color: navy !important;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
