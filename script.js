@@ -50,8 +50,49 @@ function prevStep(step) {
     currentStep--;
 }
 
-function sendRequest(){
+// function sendRequest(){
+//     const SPName = document.getElementById('name').value;
+//     const ENS = document.getElementById('ENS').value;
+//     const SPDomain = document.getElementById('domain').value;
 
+//     console.log('Form submitted:', { SPName, ENS, SPDomain});
+
+//     const metaData = JSON.stringify({ name: SPName, domain: SPDomain });
+
+//     let JSONData;
+//     if(user_address){
+//         JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id, user_address: user_address });
+//     } else{
+//         JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id});
+//     }
+
+//     console.log("JSONData: ", JSONData);
+//     // Here you would typically send this data to your server
+//     const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
+//     fetch(checkUrl, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSONData
+//     })
+//     .then(response => response.text())
+//     .then(data => {
+//         console.log(data);
+//         alert('Registration submitted successfully!');
+
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//         alert("Error, please try later");
+//     });
+    
+// }
+
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    document.getElementById('registrationForm').disabled = true;
     const SPName = document.getElementById('name').value;
     const ENS = document.getElementById('ENS').value;
     const SPDomain = document.getElementById('domain').value;
@@ -80,18 +121,16 @@ function sendRequest(){
     .then(response => response.text())
     .then(data => {
         console.log(data);
+
         alert('Registration submitted successfully!');
 
     })
     .catch(error => {
         console.error('Error:', error);
         alert("Error, please try later");
-    });
-}
+        document.getElementById('registrationForm').disabled = false;
 
-document.getElementById('registrationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
+    });
     
 });
 
