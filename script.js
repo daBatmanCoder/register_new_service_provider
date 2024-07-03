@@ -50,11 +50,7 @@ function prevStep(step) {
     currentStep--;
 }
 
-
-
-document.getElementById('registrationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
+function sendRequest(){
     const SPName = document.getElementById('name').value;
     const ENS = document.getElementById('ENS').value;
     const SPDomain = document.getElementById('domain').value;
@@ -62,6 +58,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     console.log('Form submitted:', { SPName, ENS, SPDomain});
 
     const metaData = JSON.stringify({ name: SPName, domain: SPDomain });
+
     let JSONData;
     if(user_address){
         JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id, user_address: user_address });
@@ -89,6 +86,12 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         console.error(error);
         alert("Error, please try later");
     });
+}
+
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    
 });
 
 function populateConfirmation() {
@@ -96,7 +99,6 @@ function populateConfirmation() {
     document.getElementById('confirmENS').textContent = document.getElementById('ENS').value;
     document.getElementById('confirmSPDomain').textContent = document.getElementById('domain').value;
 }
-
 
 
 
