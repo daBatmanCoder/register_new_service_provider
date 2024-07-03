@@ -51,6 +51,7 @@ function prevStep(step) {
 }
 
 function sendRequest(){
+
     const SPName = document.getElementById('name').value;
     const ENS = document.getElementById('ENS').value;
     const SPDomain = document.getElementById('domain').value;
@@ -78,12 +79,12 @@ function sendRequest(){
     })
     .then(response => response.text())
     .then(data => {
-
+        console.log(data);
         alert('Registration submitted successfully!');
 
     })
     .catch(error => {
-        console.error(error);
+        console.error('Error:', error);
         alert("Error, please try later");
     });
 }
