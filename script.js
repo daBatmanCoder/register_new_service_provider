@@ -93,7 +93,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     e.preventDefault();
 
     const resultElement = document.getElementById('resultTextbox');
-    resultElement.textContent = "Please wait while we register your ENS: \"" + ensName + "\"...";
+    resultElement.innerText = "Please wait while we register your ENS: \"" + ensName + "\"...";
     resultElement.style.display = 'block';
 
     document.getElementById('submitButton').disabled = true;
@@ -125,16 +125,16 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        resultElement.textContent = "The service provider has been registered successfully! \n The contract address of the deployed contract is: " + data + "\n The ENS name is: " + ENS + "\n The domain is: " + SPDomain + "\n The metadata is: " + metaData + "\n The customer ID is: " + session_id + "\n The user address is: " + user_address + "\n";
+        resultElement.innerText = "The service provider has been registered successfully! \n The contract address of the deployed contract is: " + data + "\n The ENS name is: " + ENS + "\n The domain is: " + SPDomain + "\n The metadata is: " + metaData + "\n The customer ID is: " + session_id + "\n The user address is: " + user_address + "\n";
     })
     .catch(error => {
         console.error('Error:', error);
         alert("Error, please try later");
-        resultElement.textContent = "Error: " + error + "\n Please try again later.";
+        resultElement.innerText = "Error: " + error + "\n Please try again later.";
         document.getElementById('submitButton').disabled = false;
 
     });
-    
+
     resultElement.style.display = 'block';
 
     
