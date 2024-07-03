@@ -64,7 +64,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     const metaData = JSON.stringify({ name: SPName, domain: SPDomain });
     let JSONData;
     if(user_address){
-        JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id, user_address: user_address, });
+        JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id, user_address: user_address });
     } else{
         JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id});
     }
