@@ -92,6 +92,10 @@ function prevStep(step) {
 document.getElementById('registrationForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
+    const resultElement = document.getElementById('resultTextbox');
+    resultElement.textContent = "Please wait while we register your ENS: \"" + ensName + "\"...";
+    resultElement.style.display = 'block';
+
     document.getElementById('submitButton').disabled = true;
     const SPName = document.getElementById('name').value;
     const ENS = document.getElementById('ENS').value;
@@ -121,21 +125,18 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        const resultElement = document.getElementById('resultTextbox');
         resultElement.textContent = "The service provider has been registered successfully! \n The contract address of the deployed contract is: " + data + "\n The ENS name is: " + ENS + "\n The domain is: " + SPDomain + "\n The metadata is: " + metaData + "\n The customer ID is: " + session_id + "\n The user address is: " + user_address + "\n";
-        resultElement.style.display = 'block';
-        alert('Registration submitted successfully!');
-
     })
     .catch(error => {
         console.error('Error:', error);
         alert("Error, please try later");
-        const resultElement = document.getElementById('resultTextbox');
         resultElement.textContent = "Error: " + error + "\n Please try again later.";
-        resultElement.style.display = 'block';
         document.getElementById('submitButton').disabled = false;
 
     });
+    
+    resultElement.style.display = 'block';
+
     
 });
 
@@ -241,6 +242,10 @@ function registerENSS() {
 
 
     const ensName = document.getElementById('ensName').value;
+
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = "Please wait while we register your ENS: \"" + ensName + "\"...";
+    resultElement.style.display = 'block';
 
     let domain = document.getElementById('selectedDomain').value;
     console.log(domain);
