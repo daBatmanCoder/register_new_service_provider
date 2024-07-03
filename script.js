@@ -243,7 +243,8 @@ function registerENSS() {
 
     const ensName = document.getElementById('ensName').value;
 
-    
+    document.getElementById('checkENS').disabled = true;
+    document.getElementById('registerENS').disabled = true;
 
     let domain = document.getElementById('selectedDomain').value;
     console.log(domain);
@@ -309,6 +310,8 @@ function registerENSS() {
     })
     .catch(error => {
         alert('Error registering ENS: ' + error.message);
+        document.getElementById('checkENS').disabled = false;
+        document.getElementById('registerENS').disabled = false;
     });
 }
 
