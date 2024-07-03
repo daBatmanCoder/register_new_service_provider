@@ -69,6 +69,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id});
     }
 
+    console.log("JSONData: ", JSONData);
     // Here you would typically send this data to your server
     const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
     fetch(checkUrl, {
