@@ -92,7 +92,7 @@ function prevStep(step) {
 document.getElementById('registrationForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    document.getElementById('registrationForm').disabled = true;
+    document.getElementById('submitButton').disabled = true;
     const SPName = document.getElementById('name').value;
     const ENS = document.getElementById('ENS').value;
     const SPDomain = document.getElementById('domain').value;
@@ -121,6 +121,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     .then(response => response.text())
     .then(data => {
         console.log(data);
+        document.getElementById('resultTextbox').innerText = "The service provider has been registered successfully! \n The contract address of the deployed contract is: " + data + "\n The ENS name is: " + ENS + "\n The domain is: " + SPDomain + "\n The metadata is: " + metaData + "\n The customer ID is: " + session_id + "\n The user address is: " + user_address + "\n";
 
         alert('Registration submitted successfully!');
 
@@ -128,7 +129,9 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     .catch(error => {
         console.error('Error:', error);
         alert("Error, please try later");
-        document.getElementById('registrationForm').disabled = false;
+        document.getElementById('resultTextbox').innerText = "The service provider has not been registered successfully! please try again"
+    
+        document.getElementById('submitButton').disabled = false;
 
     });
     
