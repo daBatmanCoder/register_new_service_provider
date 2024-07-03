@@ -93,7 +93,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     e.preventDefault();
 
     const resultElement = document.getElementById('resultTextbox');
-    resultElement.innerText = "Please wait while we register your ENS: \"" + ensName + "\"...";
+    resultElement.innerText = "Please wait while we process your request...";
     resultElement.style.display = 'block';
 
     document.getElementById('submitButton').disabled = true;
@@ -125,7 +125,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     .then(response => response.text())
     .then(data => {
         console.log(data);
-        resultElement.innerText = "The service provider has been registered successfully! \n The contract address of the deployed contract is: " + data + "\n The ENS name is: " + ENS + "\n The domain is: " + SPDomain + "\n The metadata is: " + metaData + "\n The customer ID is: " + session_id + "\n The user address is: " + user_address + "\n";
+        resultElement.innerText = "The service provider has been registered successfully! \n\n The contract address of the deployed contract is: " + data + "\n\n The ENS name is: " + ENS + "\n\n The domain is: " + SPDomain + "\n\n The metadata is: " + metaData + "\n\n The customer ID is: " + session_id + "\n\n The user address is: " + user_address + "\n\n If you have any questions or some of data is incorrect, please contact us at: cellact.com";
     })
     .catch(error => {
         console.error('Error:', error);
@@ -243,9 +243,7 @@ function registerENSS() {
 
     const ensName = document.getElementById('ensName').value;
 
-    const resultElement = document.getElementById('result');
-    resultElement.textContent = "Please wait while we register your ENS: \"" + ensName + "\"...";
-    resultElement.style.display = 'block';
+    
 
     let domain = document.getElementById('selectedDomain').value;
     console.log(domain);
@@ -254,6 +252,9 @@ function registerENSS() {
     }
     const fullENS = ensName + "." + domain;
     console.log("FullName in registeration: ", fullENS);
+    const resultElement = document.getElementById('result');
+    resultElement.textContent = "Please wait while we register your ENS: \"" + fullENS + "\"...";
+    resultElement.style.display = 'block';
 
 
     let password = document.getElementById('password').value;
