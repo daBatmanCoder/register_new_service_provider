@@ -112,31 +112,42 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         JSONData = JSON.stringify({ metadata: metaData, ens: ENS, domain : SPDomain, customer_id: session_id});
     }
 
-    console.log("JSONData: ", JSONData);
     // Here you would typically send this data to your server
-    const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
-    fetch(checkUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSONData
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-        resultElement.innerText = "The service provider has been registered successfully! \n\n The contract address of the deployed contract is: " + data + "\n\n The ENS name is: " + ENS + "\n\n The domain is: " + SPDomain + "\n\n The metadata is: " + metaData + "\n\n The customer ID is: " + session_id + "\n\n The user address is: " + user_address + "\n\n If you have any questions or some of data is incorrect, please contact us at: cellact.com";
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("Error, please try later");
-        resultElement.innerText = "Error: " + error + "\n Please try again later.";
-        document.getElementById('submitButton').disabled = false;
+    // const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
+    // fetch(checkUrl, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSONData
+    // })
+    // .then(response => response.text())
+    // .then(data => {
+    //     console.log(data);
+    //     resultElement.innerText = "The service provider has been registered successfully! \n\n The contract address of the deployed contract is: " + data + "\n\n The ENS name is: " + ENS + "\n\n The domain is: " + SPDomain + "\n\n The metadata is: " + metaData + "\n\n The customer ID is: " + session_id + "\n\n The user address is: " + user_address + "\n\n If you have any questions or some of data is incorrect, please contact us at: cellact.com";
+    // })
+    // .catch(error => {
+    //     console.error('Error:', error);
+    //     alert("Error, please try later");
+    //     resultElement.innerText = "Error: " + error + "\n Please try again later.";
+    //     document.getElementById('submitButton').disabled = false;
 
-    });
+    // });
+
+    resultElement.innerText = "The service provider has been registered successfully!";
+
+    const json_to_native = { metadata: metaData, ens: ENS, domain : SPDomain, user_address: user_address }
+    const data_to_send = {action: "NEWSP", body: json_to_native }
+    console.log(data_to_send);
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.buttonPressed) {
+        window.webkit.messageHandlers.buttonPressed.postMessage(JSON.stringify(data_to_send))
+    } else if (window.AndroidBridge && window.AndroidBridge.processAction) {
+        window.AndroidBridge.processAction(JSON.stringify(data_to_send));
+    } else {
+        console.log("Native interface not available");
+    }
 
     resultElement.style.display = 'block';
-
     
 });
 
@@ -262,12 +273,15 @@ function registerENSS() {
     if(user_address){
         password = "...";
     }
+
+
     const registerUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/buy_ens_w_encrypt';
     if (user_address){
         body_to_send = { ens: ensName, domain: domain, password: password, customer_id: session_id, user_address: user_address}
     } else{
         body_to_send = { ens: ensName, domain: domain, password: password, customer_id: session_id}
     }
+
     fetch(registerUrl, {
         method: 'POST',
         headers: {
@@ -280,18 +294,18 @@ function registerENSS() {
 
         if (user_address){
             const resultElement = document.getElementById('result');
-            resultElement.textContent = `ENS you choosed ${fullENS} is registered successfully! at service's provider- ${data}`;
+            resultElement.textContent = `ENS you choosed ${fullENS} is registered successfully!`
             resultElement.style.display = 'block';
 
-            const data_to_send = {action: "ENS", body: { ens: fullENS, sp : data} }
-            console.log(data_to_send);
-            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.buttonPressed) {
-                window.webkit.messageHandlers.buttonPressed.postMessage(JSON.stringify(data_to_send))
-            } else if (window.AndroidBridge && window.AndroidBridge.processAction) {
-                window.AndroidBridge.processAction(JSON.stringify(data_to_send));
-            } else {
-                console.log("Native interface not available");
-            }
+            // const data_to_send = {action: "ENS", body: { ens: fullENS, sp : data} }
+            // console.log(data_to_send);
+            // if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.buttonPressed) {
+            //     window.webkit.messageHandlers.buttonPressed.postMessage(JSON.stringify(data_to_send))
+            // } else if (window.AndroidBridge && window.AndroidBridge.processAction) {
+            //     window.AndroidBridge.processAction(JSON.stringify(data_to_send));
+            // } else {
+            //     console.log("Native interface not available");
+            // }
         } else{
             const resultElement = document.getElementById('result');
             console.log("no user address");
