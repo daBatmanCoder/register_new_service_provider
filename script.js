@@ -113,26 +113,26 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     }
 
     // Here you would typically send this data to your server
-    // const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
-    // fetch(checkUrl, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSONData
-    // })
-    // .then(response => response.text())
-    // .then(data => {
-    //     console.log(data);
-    //     resultElement.innerText = "The service provider has been registered successfully! \n\n The contract address of the deployed contract is: " + data + "\n\n The ENS name is: " + ENS + "\n\n The domain is: " + SPDomain + "\n\n The metadata is: " + metaData + "\n\n The customer ID is: " + session_id + "\n\n The user address is: " + user_address + "\n\n If you have any questions or some of data is incorrect, please contact us at: cellact.com";
-    // })
-    // .catch(error => {
-    //     console.error('Error:', error);
-    //     alert("Error, please try later");
-    //     resultElement.innerText = "Error: " + error + "\n Please try again later.";
-    //     document.getElementById('submitButton').disabled = false;
+    const checkUrl = 'https://us-central1-arnacon-nl.cloudfunctions.net/register_new_service_provider';
+    fetch(checkUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSONData
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+        // resultElement.innerText = "The service provider has been registered successfully! \n\n The contract address of the deployed contract is: " + data + "\n\n The ENS name is: " + ENS + "\n\n The domain is: " + SPDomain + "\n\n The metadata is: " + metaData + "\n\n The customer ID is: " + session_id + "\n\n The user address is: " + user_address + "\n\n If you have any questions or some of data is incorrect, please contact us at: cellact.com";
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Error, please try later");
+        resultElement.innerText = "Error: " + error + "\n Please try again later.";
+        document.getElementById('submitButton').disabled = false;
 
-    // });
+    });
 
     resultElement.innerText = "The service provider has been registered successfully!";
 
