@@ -146,7 +146,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     } else {
         console.log("Native interface not available");
     }
-
+    
     resultElement.style.display = 'block';
     
 });
@@ -167,19 +167,20 @@ function checkENSS() {
         document.getElementById('password').style.display = 'none';
     }
 
-    let selectedDomain = document.getElementById('selectedDomain').value;
-    console.log(selectedDomain);
-    if(selectedDomain == ""){
-        selectedDomain = "cellact";
-    }
+    // let selectedDomain = document.getElementById('selectedDomain').value;
+    // console.log(selectedDomain);
+    // if(selectedDomain == ""){
+    //     selectedDomain = "cellact";
+    // }
 
-    const ensName = document.getElementById('ensName').value;
-    if (!ensName || /^\d+$/.test(ensName) || /[^a-zA-Z0-9]/.test(ensName)) {
-        alert("Please enter a valid ENS name (letters and numbers only, not purely numeric).");
+    let ensName = document.getElementById('ensName').value;
+    if (!ensName || /[^a-zA-Z]/.test(ensName)) {
+        alert("Please enter a valid domain name (letters only).");
         return;
     }
-    document.getElementById('availabilityResult').textContent = "Checking ENS: \"" + ensName +  "." + selectedDomain + "\" for availability...";
-    const ensJSON = JSON.stringify({ ens: ensName + "." + selectedDomain});
+    ensName = ensName.toLowerCase();
+    document.getElementById('availabilityResult').textContent = "Checking Domain: \"" + ensName + "\" for availability...";
+    const ensJSON = JSON.stringify({ ens: ensName});
     // resetDomainButtons();
     // Assuming the function URL to check ENS availability
     const checkUrl = 'https://europe-west4-arnacon-nl.cloudfunctions.net/resolve-ens';
@@ -194,24 +195,23 @@ function checkENSS() {
     .then(data => {
         const availabilityElement = document.getElementById('availabilityResult');
         if (data === "0x0000000000000000000000000000000000000000") { // Zero address means available
-            console.log("hey")
-            availabilityElement.textContent = "ENS: \""+ ensName + "." + selectedDomain+ "\" is available!";
+            availabilityElement.textContent = "Domain: \""+ ensName + "\" is available!";
             availabilityElement.style.color = "green";
+
             if(user_address == null){
-                console.log("hey123123")  
                 document.getElementById('password').style.display = 'block';
             }
             document.getElementById('registerENS').style.display = 'block';
-            document.getElementById('registerENS').innerText = "Register " + ensName + "." + selectedDomain + " Now!";
+            document.getElementById('registerENS').innerText = "Register " + ensName + " Now!";
         } else {
 
-            availabilityElement.textContent = "ENS is already taken.";
+            availabilityElement.textContent = "Domain is already taken.";
             availabilityElement.style.color = "red";
 
         }
     })
     .catch(error => {
-        console.error('Error checking ENS availability:', error);
+        console.error('Error checking domain availability:', error);
         alert("Failed to check availability. Please try again.");
 
         document.getElementById('ensName').value = '';
@@ -238,37 +238,38 @@ function registerENSES() {
 
     const ensName = document.getElementById('ensName').value;
 
-    let domain = document.getElementById('selectedDomain').value;
-    console.log(domain);
-    if(domain == ""){
-        domain = "cellact";
-    }
-    const fullENS = ensName + "." + domain;
-    console.log("FullName in registeration: ", fullENS);
+    // let domain = document.getElementById('selectedDomain').value;
+    // console.log(domain);
+    // if(domain == ""){
+    //     domain = "cellact";
+    // }
+
+    const fullENS = ensName;
     document.getElementById('ENS').value = fullENS;
-    console.log("ENS: ", document.getElementById('ENS').value);
+    // console.log("ENS: ", document.getElementById('ENS').value);
 }
 
 function registerENSS() {
 
 
-    const ensName = document.getElementById('ensName').value;
+    let ensName = document.getElementById('ensName').value;
+    ensName = ensName.toLowerCase();
 
     document.getElementById('checkENS').disabled = true;
     document.getElementById('registerENS').disabled = true;
 
-    let domain = document.getElementById('selectedDomain').value;
-    console.log(domain);
-    if(domain == ""){
-        domain = "cellact";
-    }
-    const fullENS = ensName + "." + domain;
+    // let domain = document.getElementById('selectedDomain').value;
+    // console.log(domain);
+    // if(domain == ""){
+    //     domain = "cellact";
+    // }
+    const fullENS = ensName;
     console.log("FullName in registeration: ", fullENS);
     const resultElement = document.getElementById('result');
-    resultElement.textContent = "Please wait while we register your ENS: \"" + fullENS + "\"...";
+    resultElement.textContent = "Please wait while we register your domain: \"" + fullENS + "\"...";
     resultElement.style.display = 'block';
 
-
+    const domain = "";
     let password = document.getElementById('password').value;
     if(user_address){
         password = "...";
@@ -294,7 +295,7 @@ function registerENSS() {
 
         if (user_address){
             const resultElement = document.getElementById('result');
-            resultElement.textContent = `ENS you choosed ${fullENS} is registered successfully!`
+            resultElement.textContent = `Domain you choosed ${fullENS} is registered successfully!`
             resultElement.style.display = 'block';
 
             // const data_to_send = {action: "ENS", body: { ens: fullENS, sp : data} }
@@ -309,7 +310,7 @@ function registerENSS() {
         } else{
             const resultElement = document.getElementById('result');
             console.log("no user address");
-            resultElement.textContent = `ENS you choosed ${fullENS} is registered successfully! \n your data is encrypted and stored at service's provider- ${data}`;
+            resultElement.textContent = `Domain you choosed ${fullENS} is registered successfully! \n your data is encrypted and stored at service's provider- ${data}`;
             resultElement.style.display = 'block';
             document.getElementById('instructions').style.display = 'block';
 

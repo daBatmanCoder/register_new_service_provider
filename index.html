@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <title>Service Provider Registration</title>
     <link rel="stylesheet" href="styles.css">
-</head>
+</head> 
 <body>
     <div class="container">
         <h1>Service Provider Registration</h1>
@@ -18,17 +18,12 @@
                 <button type="button" onclick="nextStep(1)">Next</button>
             </div>
             <div class="step" id="step2">
-                <h2>Step 2: ENS</h2>
+                <h2>Step 2: ENS-Domain</h2>
                 <p class="description">
-                    Enter the ENS name you wish to purchase. It should consist of letters and numbers only, and cannot be purely numeric.
+                    Enter the domain you wish to purchase. It should consist of letters only.
+                    This domain will be used by the you to create a subdomain for each user.
                 </p>
-                <p>(Default) Every ENS will be suffixed with ".cellact"</p>
-                <button type="button" class="domain-button" onclick="setDomain('cellact')">.cellact</button>
-                <p></p>
-                <button type="button" class="domain-button" onclick="setDomain('eth')">.eth</button>
-                <input type="hidden" id="selectedDomain" name="selectedDomain" value="cellact">
-                <p></p>
-                <input type="text" id="ensName" name="ensName" placeholder="Your ENS name" required>
+                <input type="text" id="ensName" name="ensName" placeholder="Your domain name" required>
                 <p></p>
                 <button type="button" id="checkENS" onclick="checkENSS()">Check Availability</button>
                 <p id="availabilityResult"></p>
